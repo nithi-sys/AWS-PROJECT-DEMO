@@ -1,0 +1,2092 @@
+/* =========================================================
+   AWS STEP FUNCTIONS
+   CLOUD WORKFLOW RESILIENCE LAB
+   COMPLETE CORRECTED CSS
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background: #081018;
+
+    color: #e8edf3;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.topbar {
+    width: 100%;
+    height: 72px;
+
+    padding: 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #101923;
+
+    border-bottom:
+        1px solid #293848;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+}
+
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.brand-icon {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid #415367;
+
+    border-radius: 8px;
+
+    color: #ff9900;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.brand h1 {
+    margin: 0;
+
+    color: #edf2f7;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+.brand p {
+    margin: 2px 0 0;
+
+    color: #8290a0;
+
+    font-size: 11px;
+}
+
+
+.status-pill {
+    padding: 7px 13px;
+
+    border:
+        1px solid #27553b;
+
+    border-radius: 20px;
+
+    background: #102219;
+
+    color: #76e0a4;
+
+    font-size: 11px;
+}
+
+
+.status-dot {
+    display: inline-block;
+
+    width: 7px;
+    height: 7px;
+
+    margin-right: 6px;
+
+    border-radius: 50%;
+
+    background: #35d582;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 28px;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.intro-card {
+    width: 100%;
+
+    min-height: 150px;
+
+    margin-bottom: 20px;
+
+    padding: 27px 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #111d29,
+            #0e161f
+        );
+}
+
+
+.eyebrow {
+    color: #ff9900;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+
+.intro-card h2 {
+    margin: 7px 0;
+
+    color: #edf2f7;
+
+    font-size: 28px;
+}
+
+
+.intro-card p {
+    margin: 0;
+
+    max-width: 800px;
+
+    color: #9aa7b5;
+
+    font-size: 13px;
+}
+
+
+.service-badge {
+    min-width: 150px;
+
+    padding: 13px 20px;
+
+    border:
+        1px solid #33475c;
+
+    border-radius: 8px;
+
+    background: #101923;
+
+    text-align: center;
+}
+
+
+.service-badge strong {
+    display: block;
+
+    color: #ff9900;
+}
+
+
+.service-badge span {
+    color: #8da4bb;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.panel {
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    padding: 20px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 12px;
+
+    background: #101923;
+}
+
+
+.panel-header {
+    width: 100%;
+
+    margin-bottom: 20px;
+}
+
+
+.panel-header h2 {
+    margin: 0;
+
+    color: #edf2f7;
+
+    font-size: 20px;
+}
+
+
+.panel-header p {
+    margin: 5px 0 0;
+
+    color: #83909e;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.form-group label,
+.failure-mode-row label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #9aa8b7;
+
+    font-size: 11px;
+}
+
+
+.form-group input,
+.failure-mode-row select {
+    width: 100%;
+
+    min-height: 40px;
+
+    padding: 11px 12px;
+
+    border:
+        1px solid #37495b;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #091119;
+
+    color: #e8edf3;
+
+    font-size: 13px;
+}
+
+
+.form-group input:focus,
+.failure-mode-row select:focus {
+    border-color: #ff9900;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(255, 153, 0, 0.08);
+}
+
+
+/* =========================================================
+   FAILURE CONTROL
+   ========================================================= */
+
+.failure-control {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 9px;
+
+    background: #0c141d;
+}
+
+
+.failure-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.failure-header h3 {
+    margin: 0;
+
+    color: #edf2f7;
+
+    font-size: 14px;
+}
+
+
+.failure-header p {
+    margin: 4px 0 0;
+
+    color: #778696;
+
+    font-size: 10px;
+}
+
+
+.failure-mode-row {
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.switch {
+    width: 48px;
+
+    height: 26px;
+
+    position: relative;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+}
+
+
+.switch input {
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+}
+
+
+.slider {
+    position: absolute;
+
+    inset: 0;
+
+    cursor: pointer;
+
+    border-radius: 20px;
+
+    background: #354454;
+
+    transition: 0.25s;
+}
+
+
+.slider:before {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    transition: 0.25s;
+}
+
+
+.switch input:checked + .slider {
+    background: #ff9900;
+}
+
+
+.switch input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.button-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+
+button {
+    border: 0;
+
+    border-radius: 7px;
+
+    padding: 11px 17px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s,
+        border-color 0.2s;
+}
+
+
+button:hover {
+    transform: translateY(-1px);
+
+    opacity: 0.92;
+}
+
+
+.primary-btn {
+    background: #ff9900;
+
+    color: #121820;
+}
+
+
+.secondary-btn {
+    background: #293848;
+
+    color: #e2e9f0;
+}
+
+
+/* =========================================================
+   QUICK TESTS
+   ========================================================= */
+
+.quick-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.quick {
+    min-height: 75px;
+
+    padding: 14px;
+
+    border:
+        1px solid #2a3a4a;
+
+    border-radius: 7px;
+
+    background: #172330;
+
+    color: #e5ebf1;
+
+    text-align: left;
+}
+
+
+.quick:hover {
+    border-color: #ff9900;
+}
+
+
+.failure-quick {
+    border-color: #5b3035;
+}
+
+
+.recovery-quick {
+    border-color: #365a45;
+}
+
+
+.quick-title {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+}
+
+
+.quick-description {
+    display: block;
+
+    color: #8190a0;
+
+    font-size: 10px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   EXECUTION STATUS
+   ========================================================= */
+
+.status-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.status-card {
+    min-height: 85px;
+
+    padding: 15px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 8px;
+
+    background: #0c141d;
+}
+
+
+.status-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #7e8c9c;
+
+    font-size: 10px;
+}
+
+
+.status-card strong {
+    display: block;
+
+    color: #e8edf3;
+
+    font-size: 13px;
+}
+
+
+.execution-id {
+    color: #8db8e8 !important;
+
+    font-family: monospace;
+
+    font-size: 10px !important;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   =========================================================
+   WORKFLOW
+   =========================================================
+   ========================================================= */
+
+.workflow-panel {
+    overflow: hidden;
+}
+
+
+/*
+    This is the main workflow canvas.
+
+    Everything before Payment is centered.
+
+    The successful path after Payment is ALSO centered.
+
+    The failure path is positioned separately on the
+    right side when it becomes visible.
+*/
+
+.workflow-wrapper {
+    width: 100%;
+
+    min-width: 950px;
+
+    padding:
+        35px 25px 60px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow-x: auto;
+}
+
+
+/* =========================================================
+   WORKFLOW NODE
+   ========================================================= */
+
+.workflow-node {
+    width: 270px;
+
+    min-height: 76px;
+
+    padding: 12px 16px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px solid #3b4e62;
+
+    border-radius: 10px;
+
+    background: #162432;
+
+    position: relative;
+
+    z-index: 5;
+
+    transition:
+        border-color 0.25s,
+        background 0.25s,
+        box-shadow 0.25s;
+}
+
+
+.workflow-node .node-type {
+    margin-bottom: 3px;
+
+    color: #8ea2b7;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+
+.workflow-node strong {
+    color: #edf2f7;
+
+    font-size: 13px;
+}
+
+
+.workflow-node small {
+    margin-top: 2px;
+
+    color: #7e8d9e;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   WORKFLOW STATE COLORS
+   ========================================================= */
+
+.workflow-node.active {
+    border-color: #ff9900;
+
+    background: #2a2111;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(255,153,0,.12),
+
+        0 0 18px
+        rgba(255,153,0,.10);
+}
+
+
+.workflow-node.done {
+    border-color: #2ea66a;
+
+    background: #102b1e;
+}
+
+
+.workflow-node.failed {
+    border-color: #e05260;
+
+    background: #32171a;
+}
+
+
+/* =========================================================
+   SPECIAL WORKFLOW NODES
+   ========================================================= */
+
+.start-node {
+    width: 110px;
+
+    min-height: 45px;
+
+    border-color: #2ea66a;
+
+    border-radius: 30px;
+
+    background: #102b1e;
+}
+
+
+.start-node .node-type {
+    color: #4ddd92;
+}
+
+
+.choice-node {
+    border-color: #967638;
+
+    background: #211d13;
+}
+
+
+.choice-node .node-type {
+    color: #ffc65f;
+}
+
+
+.payment-node {
+    border-color: #597491;
+
+    background: #172635;
+}
+
+
+.parallel-node {
+    width: 300px;
+
+    border-color: #318053;
+
+    background: #14251c;
+}
+
+
+.success-node {
+    border-color: #2ea66a;
+
+    background: #102b1e;
+}
+
+
+.refund-node {
+    border-color: #bd873e;
+
+    background: #211a10;
+}
+
+
+.failed-node {
+    border-color: #e05260;
+
+    background: #32171a;
+}
+
+
+/* =========================================================
+   NORMAL VERTICAL CONNECTOR
+   ========================================================= */
+
+.connector {
+    width: 2px;
+
+    height: 35px;
+
+    flex-shrink: 0;
+
+    background: #43576b;
+
+    position: relative;
+}
+
+
+.connector::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 0;
+
+    width: 7px;
+    height: 7px;
+
+    transform:
+        translate(-50%, 2px)
+        rotate(45deg);
+
+    border-right:
+        2px solid #43576b;
+
+    border-bottom:
+        2px solid #43576b;
+}
+
+
+/* =========================================================
+   AMOUNT CHOICE
+   ========================================================= */
+
+.choice-area {
+    width: 650px;
+
+    height: 120px;
+
+    margin-top: 8px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    position: relative;
+}
+
+
+/*
+    Horizontal branch line
+*/
+
+.choice-area::before {
+    content: "";
+
+    position: absolute;
+
+    left: 25%;
+
+    right: 25%;
+
+    top: 0;
+
+    height: 1px;
+
+    background: #43576b;
+}
+
+
+/* =========================================================
+   CHOICE BRANCH
+   ========================================================= */
+
+.choice-branch {
+    width: 270px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+}
+
+
+.branch-label {
+    min-width: 34px;
+
+    padding:
+        3px 10px;
+
+    border:
+        1px solid #3b4d60;
+
+    border-radius: 20px;
+
+    background: #182532;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.premium-label {
+    color: #77b6f2;
+}
+
+
+.normal-label {
+    color: #b5bec8;
+}
+
+
+/*
+    Vertical line from YES / NO
+*/
+
+.branch-line {
+    width: 2px;
+
+    height: 27px;
+
+    background: #43576b;
+}
+
+
+/* =========================================================
+   BRANCH MERGE
+   ========================================================= */
+
+.branch-merge {
+    width: 650px;
+
+    height: 55px;
+
+    position: relative;
+}
+
+
+/*
+    Left vertical
+*/
+
+.merge-left {
+    position: absolute;
+
+    left: 25%;
+
+    top: 0;
+
+    width: 2px;
+
+    height: 25px;
+
+    background: #43576b;
+}
+
+
+/*
+    Right vertical
+*/
+
+.merge-right {
+    position: absolute;
+
+    right: 25%;
+
+    top: 0;
+
+    width: 2px;
+
+    height: 25px;
+
+    background: #43576b;
+}
+
+
+/*
+    Horizontal merge
+*/
+
+.merge-center {
+    position: absolute;
+
+    left: 25%;
+
+    right: 25%;
+
+    top: 24px;
+
+    height: 2px;
+
+    background: #43576b;
+}
+
+
+/*
+    Connector from merge into Payment
+*/
+
+.merge-center::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 2px;
+
+    height: 31px;
+
+    background: #43576b;
+}
+
+
+/* =========================================================
+   PAYMENT OUTCOME AREA
+   ========================================================= */
+
+/*
+    IMPORTANT:
+
+    Do NOT use grid columns here.
+
+    The success path remains exactly centered
+    underneath Payment.
+
+    Failure is positioned independently.
+*/
+
+.payment-outcome {
+    width: 100%;
+
+    min-height: 650px;
+
+    margin-top: 15px;
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+
+/* =========================================================
+   SUCCESS PATH
+   ========================================================= */
+
+.success-column {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   SUCCESS LABEL
+   ========================================================= */
+
+.path-label {
+    margin-bottom: 8px;
+
+    padding:
+        5px 13px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+}
+
+
+.success-label {
+    color: #63dc98;
+
+    border:
+        1px solid #2b6948;
+
+    background: #10271b;
+}
+
+
+/* =========================================================
+   SUCCESS PATH LINE
+   ========================================================= */
+
+.path-line {
+    width: 2px;
+
+    height: 25px;
+
+    background: #43576b;
+}
+
+
+/* =========================================================
+   PARALLEL PROCESSING
+   ========================================================= */
+
+.parallel-area {
+    width: 600px;
+
+    height: 130px;
+
+    margin-top: 20px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    position: relative;
+}
+
+
+/*
+    Horizontal line between branches
+*/
+
+.parallel-area::before {
+    content: "";
+
+    position: absolute;
+
+    left: 25%;
+
+    right: 25%;
+
+    top: 0;
+
+    height: 1px;
+
+    background: #43576b;
+}
+
+
+/*
+    Center vertical coming from ParallelProcessing
+*/
+
+.parallel-area::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -20px;
+
+    width: 2px;
+
+    height: 20px;
+
+    transform: translateX(-50%);
+
+    background: #43576b;
+}
+
+
+/* =========================================================
+   PARALLEL BRANCH
+   ========================================================= */
+
+.parallel-branch {
+    width: 270px;
+
+    display: flex;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+
+/*
+    Vertical line from horizontal split
+    down into each Lambda
+*/
+
+.parallel-branch::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 2px;
+
+    height: 18px;
+
+    transform: translateX(-50%);
+
+    background: #43576b;
+}
+
+
+/* =========================================================
+   CONNECTOR AFTER PARALLEL BRANCHES
+   ========================================================= */
+
+/*
+    This is not attached to the branch itself.
+    It gives a clean central continuation
+    toward WaitState.
+*/
+
+.parallel-area + .connector {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   FAILURE PATH
+   ========================================================= */
+
+/*
+    Failure path starts to the RIGHT of Payment.
+
+    It does not affect the position of the success path.
+*/
+
+.failure-column {
+    width: 430px;
+
+    min-height: 350px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: absolute;
+
+    left: calc(50% + 270px);
+
+    top: 0;
+
+    z-index: 20;
+
+    padding-left: 30px;
+
+    border-left:
+        1px dashed #6c3039;
+}
+
+
+/* =========================================================
+   FAILURE LABEL
+   ========================================================= */
+
+.failure-label {
+    color: #ff7d88;
+
+    border:
+        1px solid #68333a;
+
+    background: #2b1519;
+}
+
+
+/* =========================================================
+   RETRY AREA
+   ========================================================= */
+
+.retry-area {
+    width: 100%;
+
+    max-width: 390px;
+
+    margin:
+        10px 0 15px;
+
+    padding: 13px;
+
+    border:
+        1px dashed #b97a26;
+
+    border-radius: 9px;
+
+    background: #1d1810;
+}
+
+
+.retry-title {
+    margin-bottom: 10px;
+
+    color: #ffb347;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.retry-boxes {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.retry-box {
+    padding:
+        8px 14px;
+
+    border:
+        1px solid #664b29;
+
+    border-radius: 5px;
+
+    background: #2a2115;
+
+    color: #d6ad6f;
+
+    font-size: 9px;
+}
+
+
+.retry-box.failed {
+    border-color: #9a3943;
+
+    background: #34171b;
+
+    color: #ff7d88;
+}
+
+
+.retry-box.success {
+    border-color: #2e8b5a;
+
+    background: #123723;
+
+    color: #76e0a4;
+}
+
+
+/* =========================================================
+   FAILURE ARROW
+   ========================================================= */
+
+.failure-arrow {
+    width: 2px;
+
+    height: 30px;
+
+    margin-bottom: 5px;
+
+    background: #43576b;
+
+    position: relative;
+}
+
+
+.failure-arrow::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 0;
+
+    width: 7px;
+    height: 7px;
+
+    transform:
+        translate(-50%, 2px)
+        rotate(45deg);
+
+    border-right:
+        2px solid #43576b;
+
+    border-bottom:
+        2px solid #43576b;
+}
+
+
+/* =========================================================
+   FAILURE BRANCH FROM PAYMENT
+   ========================================================= */
+
+/*
+    The horizontal line is only displayed when
+    failurePath is visible.
+*/
+
+.payment-outcome:has(
+    .failure-column:not(.hidden)
+)::before {
+    content: "";
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 50%;
+
+    width: 300px;
+
+    height: 1px;
+
+    background: #6c3039;
+
+    z-index: 1;
+}
+
+
+/*
+    Vertical branch from Payment downward to
+    the horizontal failure line.
+*/
+
+.payment-outcome:has(
+    .failure-column:not(.hidden)
+)::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: calc(50% + 150px);
+
+    width: 2px;
+
+    height: 20px;
+
+    background: #6c3039;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   HIDDEN
+   ========================================================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   RESILIENCE ANALYTICS
+   ========================================================= */
+
+.analytics-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.analytics-card {
+    min-height: 90px;
+
+    padding: 16px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 8px;
+
+    background: #0c141d;
+}
+
+
+.analytics-card span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #7d8c9c;
+
+    font-size: 10px;
+}
+
+
+.analytics-card strong {
+    color: #e9eef4;
+
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   SCORE
+   ========================================================= */
+
+.score-section {
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 8px;
+
+    background: #0c141d;
+}
+
+
+.score-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    color: #8b99a8;
+
+    font-size: 11px;
+}
+
+
+.score-header strong {
+    color: #ffad42;
+
+    font-size: 19px;
+}
+
+
+.score-bar {
+    width: 100%;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #263545;
+}
+
+
+.score-progress {
+    width: 0%;
+
+    height: 100%;
+
+    background: #ff9900;
+
+    transition:
+        width 0.5s;
+}
+
+
+.score-text {
+    margin-top: 5px;
+
+    color: #7e8c9b;
+
+    text-align: right;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   EXECUTION EVENTS
+   ========================================================= */
+
+#eventCount {
+    color: #8190a0;
+
+    font-size: 10px;
+}
+
+
+.events {
+    width: 100%;
+
+    height: 220px;
+
+    padding: 10px;
+
+    overflow-y: auto;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 8px;
+
+    background: #080f16;
+}
+
+
+.event {
+    display: flex;
+
+    gap: 12px;
+
+    padding: 8px 4px;
+
+    border-bottom:
+        1px solid #1c2833;
+
+    font-size: 11px;
+}
+
+
+.event time {
+    min-width: 80px;
+
+    color: #647485;
+
+    font-family: monospace;
+}
+
+
+.event .ok {
+    color: #71dfa1;
+}
+
+
+.event .bad {
+    color: #ff6975;
+}
+
+
+.empty {
+    padding: 30px;
+
+    color: #617080;
+
+    text-align: center;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   AWS ARCHITECTURE
+   ========================================================= */
+
+.architecture-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.architecture-card {
+    min-height: 190px;
+
+    padding: 15px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 8px;
+
+    background: #0c141d;
+}
+
+
+.architecture-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 12px;
+
+    border:
+        1px solid #35485b;
+
+    border-radius: 8px;
+
+    background: #162330;
+
+    color: #ff9900;
+
+    font-weight: 800;
+
+    font-size: 11px;
+}
+
+
+.architecture-card h3 {
+    margin:
+        0 0 7px;
+
+    font-size: 13px;
+}
+
+
+.architecture-card p {
+    margin: 0;
+
+    color: #7f8e9e;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   ENHANCEMENT
+   ========================================================= */
+
+.enhancement-panel {
+    border-color: #40536a;
+}
+
+
+.enhancement-panel > h2 {
+    margin: 5px 0;
+
+    font-size: 20px;
+}
+
+
+.enhancement-panel > p {
+    color: #8a98a7;
+
+    font-size: 11px;
+}
+
+
+.enhancement-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    margin-top: 18px;
+}
+
+
+.enhancement-item {
+    padding: 16px;
+
+    border:
+        1px solid #293949;
+
+    border-radius: 8px;
+
+    background: #0c141d;
+}
+
+
+.enhancement-item h3 {
+    margin:
+        0 0 7px;
+
+    color: #ffad42;
+
+    font-size: 13px;
+}
+
+
+.enhancement-item p {
+    margin: 0;
+
+    color: #7f8e9e;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding:
+        20px 28px 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-top:
+        1px solid #293949;
+
+    color: #657384;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .architecture-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .quick-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .enhancement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .intro-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    /*
+        At smaller widths, put failure path
+        underneath instead of beside it.
+    */
+
+    .failure-column {
+        position: relative;
+
+        left: auto;
+        top: auto;
+
+        width: 100%;
+
+        margin-top: 40px;
+
+        padding:
+            25px 0 0;
+
+        border-left: 0;
+
+        border-top:
+            1px dashed #6c3039;
+    }
+
+
+    .payment-outcome {
+        min-height: auto;
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .payment-outcome:has(
+        .failure-column:not(.hidden)
+    )::before,
+
+    .payment-outcome:has(
+        .failure-column:not(.hidden)
+    )::after {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .brand p {
+        display: none;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
+    }
+
+
+    /*
+        Choice branches become horizontally
+        scrollable instead of breaking.
+    */
+
+    .choice-area {
+        width: 650px;
+    }
+
+
+    .branch-merge {
+        width: 650px;
+    }
+
+
+    .parallel-area {
+        width: 600px;
+    }
+
+
+    .workflow-wrapper {
+        align-items: center;
+
+        overflow-x: auto;
+    }
+
+}

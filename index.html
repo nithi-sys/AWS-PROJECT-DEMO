@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        AWS Step Functions - Cloud Workflow Resilience Lab
+    </title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            SF
+        </div>
+
+        <div>
+
+            <h1>
+                Step Functions Simulator
+            </h1>
+
+            <p>
+                Cloud Workflow Resilience Lab
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="status-pill">
+
+        <span class="status-dot"></span>
+
+        Simulator Online
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     INTRO
+     ========================================================= -->
+
+<section class="intro-card">
+
+    <div>
+
+        <div class="eyebrow">
+            AWS STEP FUNCTIONS
+        </div>
+
+        <h2>
+            Cloud Workflow Resilience Lab
+        </h2>
+
+        <p>
+            Execute a real AWS Step Functions workflow and test
+            retry and failure-handling behaviour using controlled
+            payment failures.
+        </p>
+
+    </div>
+
+
+    <div class="service-badge">
+
+        <strong>
+            AWS
+        </strong>
+
+        <span>
+            Step Functions
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     WORKFLOW EXECUTION
+     ========================================================= -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Workflow Execution
+            </h2>
+
+            <p>
+                Configure the order and failure scenario
+                before starting the workflow.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <!-- ORDER ID -->
+
+        <div class="form-group">
+
+            <label for="orderId">
+                Order ID
+            </label>
+
+            <input
+                type="text"
+                id="orderId"
+                placeholder="e.g. ORD1001"
+            >
+
+        </div>
+
+
+        <!-- AMOUNT -->
+
+        <div class="form-group">
+
+            <label for="amount">
+                Order Amount
+            </label>
+
+            <input
+                type="number"
+                id="amount"
+                min="1"
+                step="0.01"
+                placeholder="e.g. 7500"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FAILURE INJECTION -->
+
+    <div class="failure-control">
+
+        <div class="failure-header">
+
+            <div>
+
+                <h3>
+                    Failure Injection
+                </h3>
+
+                <p>
+                    Intentionally introduce payment failures
+                    to test workflow resilience.
+                </p>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="failureToggle"
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <div class="failure-mode-row">
+
+            <label for="failureMode">
+                Failure Mode
+            </label>
+
+            <select
+                id="failureMode"
+                disabled
+            >
+
+                <option value="always">
+                    Always fail
+                </option>
+
+                <option value="once">
+                    Fail once, then recover
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="button-row">
+
+        <button
+            id="runBtn"
+            class="primary-btn"
+            type="button"
+        >
+            Run Workflow
+        </button>
+
+
+        <button
+            id="resetBtn"
+            class="secondary-btn"
+            type="button"
+        >
+            Reset
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     QUICK TESTS
+     ========================================================= -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Quick Tests
+            </h2>
+
+            <p>
+                Quickly execute predefined workflow scenarios.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+
+        <button
+            class="quick"
+            data-amount="7500"
+            data-mode="none"
+            type="button"
+        >
+
+            <span class="quick-title">
+                Successful Premium
+            </span>
+
+            <span class="quick-description">
+                Amount: ₹7500
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="quick"
+            data-amount="2500"
+            data-mode="none"
+            type="button"
+        >
+
+            <span class="quick-title">
+                Successful Normal
+            </span>
+
+            <span class="quick-description">
+                Amount: ₹2500
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="quick failure-quick"
+            data-amount="7500"
+            data-mode="always"
+            type="button"
+        >
+
+            <span class="quick-title">
+                Always Fail
+            </span>
+
+            <span class="quick-description">
+                Retry → Refund → Failed
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="quick recovery-quick"
+            data-amount="7500"
+            data-mode="once"
+            type="button"
+        >
+
+            <span class="quick-title">
+                Fail Once → Recover
+            </span>
+
+            <span class="quick-description">
+                Retry → Successful
+            </span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     EXECUTION STATUS
+     ========================================================= -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Execution Status
+            </h2>
+
+            <p>
+                Live status returned from AWS Step Functions.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="status-grid">
+
+
+        <div class="status-card">
+
+            <span class="status-label">
+                Current Status
+            </span>
+
+            <strong id="runStatus">
+                Ready to execute
+            </strong>
+
+        </div>
+
+
+        <div class="status-card">
+
+            <span class="status-label">
+                Final Status
+            </span>
+
+            <strong id="finalStatus">
+                READY
+            </strong>
+
+        </div>
+
+
+        <div class="status-card">
+
+            <span class="status-label">
+                Execution ID
+            </span>
+
+            <strong
+                id="executionId"
+                class="execution-id"
+            >
+                No execution
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     STEP FUNCTIONS WORKFLOW
+     ========================================================= -->
+
+<section class="panel workflow-panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Step Functions Workflow
+            </h2>
+
+            <p>
+                Visual representation of the AWS workflow.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="workflow-wrapper">
+
+
+        <!-- =================================================
+             START
+             ================================================= -->
+
+        <div
+            class="workflow-node start-node"
+            data-state="Start"
+        >
+
+            <span class="node-type">
+                START
+            </span>
+
+            <strong>
+                Start
+            </strong>
+
+        </div>
+
+
+        <div class="connector"></div>
+
+
+
+        <!-- =================================================
+             VALIDATE ORDER
+             ================================================= -->
+
+        <div
+            class="workflow-node"
+            data-state="ValidateOrder"
+        >
+
+            <span class="node-type">
+                STATE
+            </span>
+
+            <strong>
+                ValidateOrder
+            </strong>
+
+            <small>
+                Validate input
+            </small>
+
+        </div>
+
+
+        <div class="connector"></div>
+
+
+
+        <!-- =================================================
+             CHOICE
+             ================================================= -->
+
+        <div
+            class="workflow-node choice-node"
+            data-state="CheckAmount"
+        >
+
+            <span class="node-type">
+                CHOICE
+            </span>
+
+            <strong>
+                CheckAmount
+            </strong>
+
+            <small>
+                Amount &gt; ₹5000?
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PREMIUM / NORMAL BRANCH
+             ================================================= -->
+
+        <div class="choice-area">
+
+
+            <!-- PREMIUM -->
+
+            <div class="choice-branch">
+
+                <div class="branch-label premium-label">
+                    YES
+                </div>
+
+                <div class="branch-line"></div>
+
+                <div
+                    class="workflow-node"
+                    data-state="PremiumProcessing"
+                >
+
+                    <span class="node-type">
+                        PASS
+                    </span>
+
+                    <strong>
+                        PremiumProcessing
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- NORMAL -->
+
+            <div class="choice-branch">
+
+                <div class="branch-label normal-label">
+                    NO
+                </div>
+
+                <div class="branch-line"></div>
+
+                <div
+                    class="workflow-node"
+                    data-state="NormalProcessing"
+                >
+
+                    <span class="node-type">
+                        PASS
+                    </span>
+
+                    <strong>
+                        NormalProcessing
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MERGE PREMIUM / NORMAL
+             ================================================= -->
+
+        <div class="branch-merge">
+
+            <div class="merge-left"></div>
+
+            <div class="merge-right"></div>
+
+            <div class="merge-center"></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PAYMENT
+             ================================================= -->
+
+        <div
+            class="workflow-node payment-node"
+            data-state="Payment"
+        >
+
+            <span class="node-type">
+                AWS LAMBDA
+            </span>
+
+            <strong>
+                Payment
+            </strong>
+
+            <small>
+                CAD-Payments
+            </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PAYMENT OUTCOME
+             ================================================= -->
+
+        <div class="payment-outcome">
+
+
+            <!-- =================================================
+                 SUCCESS PATH
+                 ================================================= -->
+
+            <div class="success-column">
+
+                <div class="path-label success-label">
+                    SUCCESS
+                </div>
+
+
+                <div class="path-line"></div>
+
+
+
+                <!-- PARALLEL -->
+
+                <div
+                    class="workflow-node parallel-node"
+                    data-state="ParallelProcessing"
+                >
+
+                    <span class="node-type">
+                        PARALLEL
+                    </span>
+
+                    <strong>
+                        ParallelProcessing
+                    </strong>
+
+                </div>
+
+
+
+                <!-- PARALLEL BRANCHES -->
+
+                <div class="parallel-area">
+
+
+                    <div class="parallel-branch">
+
+                        <div
+                            class="workflow-node"
+                            data-state="InventoryCheck"
+                        >
+
+                            <span class="node-type">
+                                AWS LAMBDA
+                            </span>
+
+                            <strong>
+                                InventoryCheck
+                            </strong>
+
+                            <small>
+                                CAD-Inventory
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="parallel-branch">
+
+                        <div
+                            class="workflow-node"
+                            data-state="OrderPreparation"
+                        >
+
+                            <span class="node-type">
+                                AWS LAMBDA
+                            </span>
+
+                            <strong>
+                                OrderPreparation
+                            </strong>
+
+                            <small>
+                                CAD-OrderProcessing
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="connector"></div>
+
+
+
+                <!-- WAIT -->
+
+                <div
+                    class="workflow-node"
+                    data-state="WaitState"
+                >
+
+                    <span class="node-type">
+                        WAIT
+                    </span>
+
+                    <strong>
+                        WaitState
+                    </strong>
+
+                    <small>
+                        5 seconds
+                    </small>
+
+                </div>
+
+
+
+                <div class="connector"></div>
+
+
+
+                <!-- SUCCESS -->
+
+                <div
+                    class="workflow-node success-node"
+                    data-state="WorkflowSuccess"
+                >
+
+                    <span class="node-type">
+                        SUCCESS
+                    </span>
+
+                    <strong>
+                        WorkflowSuccess
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FAILURE PATH
+                 ================================================= -->
+
+            <div
+                id="failurePath"
+                class="failure-column hidden"
+            >
+
+                <div class="path-label failure-label">
+                    CATCH / FAILURE
+                </div>
+
+
+
+                <!-- RETRIES -->
+
+                <div
+                    id="retryArea"
+                    class="retry-area hidden"
+                >
+
+                    <div class="retry-title">
+                        Step Functions Retry Attempts
+                    </div>
+
+                    <div
+                        id="retryBoxes"
+                        class="retry-boxes"
+                    ></div>
+
+                </div>
+
+
+
+                <div class="failure-arrow"></div>
+
+
+
+                <!-- REFUND -->
+
+                <div
+                    class="workflow-node refund-node"
+                    data-state="Refund"
+                >
+
+                    <span class="node-type">
+                        AWS LAMBDA
+                    </span>
+
+                    <strong>
+                        Refund
+                    </strong>
+
+                    <small>
+                        CAD-Refund
+                    </small>
+
+                </div>
+
+
+
+                <div class="connector"></div>
+
+
+
+                <!-- PAYMENT FAILED -->
+
+                <div
+                    class="workflow-node failed-node"
+                    data-state="PaymentFailed"
+                >
+
+                    <span class="node-type">
+                        FAILED
+                    </span>
+
+                    <strong>
+                        PaymentFailed
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     RESILIENCE ANALYTICS
+     ========================================================= -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Resilience Analytics
+            </h2>
+
+            <p>
+                Summary of retry and failure-handling behaviour.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="analytics-grid">
+
+
+        <div class="analytics-card">
+
+            <span>
+                Attempts
+            </span>
+
+            <strong id="attempts">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="analytics-card">
+
+            <span>
+                Retries
+            </span>
+
+            <strong id="retries">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="analytics-card">
+
+            <span>
+                Recovery
+            </span>
+
+            <strong id="recovery">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="analytics-card">
+
+            <span>
+                Final Status
+            </span>
+
+            <strong id="analyticsStatus">
+                READY
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="score-section">
+
+        <div class="score-header">
+
+            <span>
+                Resilience Score
+            </span>
+
+            <strong id="score">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="score-bar">
+
+            <div
+                id="scoreBar"
+                class="score-progress"
+            ></div>
+
+        </div>
+
+
+        <div
+            id="scoreText"
+            class="score-text"
+        >
+            0%
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     EXECUTION EVENTS
+     ========================================================= -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Execution Events
+            </h2>
+
+            <p>
+                Events generated while communicating with AWS.
+            </p>
+
+        </div>
+
+
+        <span id="eventCount">
+            0 events
+        </span>
+
+    </div>
+
+
+    <div
+        id="events"
+        class="events"
+    >
+
+        <div class="empty">
+            Run a workflow to view execution events.
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     AWS ARCHITECTURE
+     ========================================================= -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                AWS Architecture Mapping
+            </h2>
+
+            <p>
+                AWS services used by this project.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="architecture-grid">
+
+
+        <div class="architecture-card">
+
+            <div class="architecture-icon">
+                SF
+            </div>
+
+            <h3>
+                AWS Step Functions
+            </h3>
+
+            <p>
+                Orchestrates branching, Lambda tasks,
+                retries, Catch handling, parallel processing,
+                waiting and workflow completion.
+            </p>
+
+        </div>
+
+
+        <div class="architecture-card">
+
+            <div class="architecture-icon">
+                API
+            </div>
+
+            <h3>
+                API Gateway
+            </h3>
+
+            <p>
+                Provides the HTTP interface used by the
+                website to start and monitor workflows.
+            </p>
+
+        </div>
+
+
+        <div class="architecture-card">
+
+            <div class="architecture-icon">
+                λ
+            </div>
+
+            <h3>
+                AWS Lambda
+            </h3>
+
+            <p>
+                Executes validation, payment, inventory,
+                order preparation and refund operations.
+            </p>
+
+        </div>
+
+
+        <div class="architecture-card">
+
+            <div class="architecture-icon">
+                IAM
+            </div>
+
+            <h3>
+                IAM
+            </h3>
+
+            <p>
+                Controls permissions between Step Functions,
+                Lambda and AWS resources.
+            </p>
+
+        </div>
+
+
+        <div class="architecture-card">
+
+            <div class="architecture-icon">
+                CW
+            </div>
+
+            <h3>
+                CloudWatch
+            </h3>
+
+            <p>
+                Provides logs for inspecting Lambda and
+                workflow execution behaviour.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PROJECT ENHANCEMENT
+     ========================================================= -->
+
+<section class="panel enhancement-panel">
+
+    <div class="eyebrow">
+        PROJECT ENHANCEMENT
+    </div>
+
+
+    <h2>
+        Failure Injection & Resilience Testing
+    </h2>
+
+
+    <p>
+        Controlled failures are injected into the payment
+        task to demonstrate AWS Step Functions retry and
+        Catch mechanisms.
+    </p>
+
+
+    <div class="enhancement-grid">
+
+
+        <div class="enhancement-item">
+
+            <h3>
+                Always Fail
+            </h3>
+
+            <p>
+                Payment fails on every attempt. Step Functions
+                retries the payment and invokes Refund after
+                retries are exhausted.
+            </p>
+
+        </div>
+
+
+        <div class="enhancement-item">
+
+            <h3>
+                Fail Once, Then Recover
+            </h3>
+
+            <p>
+                The first payment attempt fails. Step Functions
+                retries the task and the second attempt succeeds.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer class="footer">
+
+    <span>
+        AWS Step Functions - Cloud Workflow Resilience Lab
+    </span>
+
+    <span>
+        VIT Chennai | Cloud Architecture Design
+    </span>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
